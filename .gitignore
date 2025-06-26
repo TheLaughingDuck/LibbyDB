@@ -1,0 +1,10 @@
+# Local development files
+deprecated/
+experiments/
+
+# Local cache
+__pycache__/
+
+# Secrets
+.env
+
