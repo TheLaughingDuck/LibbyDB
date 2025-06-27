@@ -8,7 +8,8 @@ CREATE TABLE `media` (
   `owned_since` text DEFAULT 'null',
   `owned_until` text DEFAULT 'null',
   `description` text DEFAULT 'null',
-  `type` text DEFAULT 'null'
+  `type` text DEFAULT 'null',
+  `loaned` boolean DEFAULT 'FALSE'
 );
 
 CREATE TABLE `employees` (
@@ -38,6 +39,6 @@ CREATE TABLE `loans` (
   `loan_date` text DEFAULT 'null',
   `return_date` text DEFAULT 'null',
   `due_date` text DEFAULT 'null',
-  `resolved` integer DEFAULT 0
+  `resolved` boolean DEFAULT 'FALSE'
 );
 ```
