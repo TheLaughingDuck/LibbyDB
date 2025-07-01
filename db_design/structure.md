@@ -27,7 +27,13 @@ The media table lists various forms of media, such as books, films, etc. It cons
 ...
 
 ## warrants
-...
+The warrants table lists the current warrants for media that have been issued by the library due to overdue books.
+
+* **id**: The primary key, unique to each warrant. 
+* **media_id**: The media id.
+* **user_id**: The user id.
+* **employee_id**: The id of the employee that has been assigned to track down the user, obtain the media, and terminate the user and their account.
+* **resolved**: Boolean indicating whether this warrant has been resolved.
 
 # Practical details
 Run the following commands to construct the underlying database table structure.
