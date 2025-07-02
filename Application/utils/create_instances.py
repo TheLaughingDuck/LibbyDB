@@ -10,12 +10,12 @@ import json
 from datetime import datetime, timedelta
 #%%
 
-def create_media(name, description, type):
+def create_media(name, description, type, date=None):
     '''
     This function creates a new media instance in the library database.
     '''
-    today_str = str(datetime.today().date())
-    sql = f" INSERT INTO media (name, owned_since, description, type) VALUES ('{name}', '{today_str}', '{description}', '{type}')"
+    if date is None: date = str(datetime.today().date()) # Set to today if not given
+    sql = f" INSERT INTO media (name, owned_since, description, type) VALUES ('{name}', '{date}', '{description}', '{type}')"
 
     # Send sql
     res = query(sql)
@@ -23,12 +23,16 @@ def create_media(name, description, type):
     return res
 
 
-def create_user(name, email):
+def create_author(name, dob, dod=None):
+    pass
+
+
+def create_user(name, email, date=None):
     '''
     This function creates a new user instance in the library database.
     '''
-    today_str = str(datetime.today().date())
-    sql = f" INSERT INTO users (name, user_since, email) VALUES ('{name}', '{today_str}', '{email}')"
+    if date is None: date = str(datetime.today().date()) # Set to today if not given
+    sql = f" INSERT INTO users (name, user_since, email) VALUES ('{name}', '{date}', '{email}')"
 
     # Send sql
     res = query(sql)
@@ -36,13 +40,14 @@ def create_user(name, email):
     return res
 
 
-def create_loan(media_id, user_id, loan_length=28):
+def create_loan(media_id, user_id, loan_length=28, date=None):
     '''
     This function creates a new loan instance in the library database.
     '''
-    today_str = str(datetime.today().date())
-    due_date = str((datetime.today() + timedelta(days=loan_length)).date())
-    sql1 = f" INSERT INTO loans (media_id, user_id, loan_date, due_date) VALUES ('{media_id}', '{user_id}', '{today_str}', '{due_date}')"
+    if date is None: date = datetime.today().date() # Set to today if not given
+    if type(date) is str: date = datetime.strptime(date, "%Y-%m-%d").date()
+    due_date = str(date + timedelta(days=loan_length))
+    sql1 = f" INSERT INTO loans (media_id, user_id, loan_date, due_date) VALUES ('{media_id}', '{user_id}', '{str(date)}', '{due_date}')"
 
     # Create loan object
     res1 = query(sql1)
@@ -58,8 +63,7 @@ def create_employee(name, title, reports_to, salary, salary_currency="SEK", empl
     '''
     This function creates a new employee instance in the library database.
     '''
-    today_str = str(datetime.today().date())
-    if employed_since is None: employed_since = today_str
+    if employed_since is None: employed_since = str(datetime.today().date()) # Set to today if not given
     sql = f" INSERT INTO employees (name, title, reports_to, salary, salary_currency, employed_since) VALUES ('{name}', '{title}', '{reports_to}', '{salary}', '{salary_currency}', '{employed_since}')"
 
     # Send sql
@@ -68,7 +72,7 @@ def create_employee(name, title, reports_to, salary, salary_currency="SEK", empl
     return res
 
 
-def return_media(media_id):
+def return_media(media_id, date=None):
     '''
     This function returns a media instance in the library database.
     '''
@@ -94,7 +98,8 @@ def return_media(media_id):
     res2 = query(sql2)
     
     # Set loan return date
-    sql3 = f" UPDATE loans SET return_date = '{datetime.today().date()}' WHERE id = {loan_id}"
+    if date is None: date = datetime.today().date()
+    sql3 = f" UPDATE loans SET return_date = '{date}' WHERE id = {loan_id}"
     res3 = query(sql3)
 
     print(f"Media id {media_id} has been returned and loan id {loan_id} has been resolved.")
