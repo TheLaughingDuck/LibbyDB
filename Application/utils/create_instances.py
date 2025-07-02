@@ -102,3 +102,13 @@ def return_media(media_id):
 
 
 # %%
+def PUT(table: str, variables: list, values: list):
+    '''
+    This is a general function used to create a new instance in a given table in the database through an SQL query.
+    '''
+
+    # Error handling
+    if len(variables) != len(values): raise ValueError("Incompatible variables and values. The number of variables and values must be the same.")
+
+    sql = f"INSERT INTO {table} ({", ".join(variables)}) VALUES ('{"\', \'".join(values)}')"
+    return query(sql)
