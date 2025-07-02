@@ -11,7 +11,7 @@ import json
 
 # Define logger
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename="../../logs/sql_logs.log", encoding="utf-8", level=logging.INFO)
+logging.basicConfig(filename="logs/sql_logs.log", encoding="utf-8", level=logging.INFO)
 
 # Grab database url and authentication token
 TURSO_DATABASE_URL=os.getenv("TURSO_DATABASE_URL")
