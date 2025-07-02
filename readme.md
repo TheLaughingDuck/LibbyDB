@@ -18,3 +18,7 @@ In order to facilitate development, the following project requirements were form
 The database currently satisfies most of the features to some extent. Below is an Entity Relationship (ER) diagram that represents the database entities and their relationships.
 
 ![alt text](db_design\ER_diagram.png)
+
+## Upcoming features
+
+* A table for location, so that one full library organization may be spread across multiple locations, but with a joint collection of media.

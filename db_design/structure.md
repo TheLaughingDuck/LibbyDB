@@ -11,6 +11,7 @@ The media table lists various forms of media, such as books, films, etc. It cons
 * **owned_since**: The date when the media was obtained by the library, in a text string, format "YYYY-MM-DD".
 * **owned_until**: The date when the library was considered no longer in posession of the media, for example if sold to another library, or lost by a user.
 * **description**: A short textual description of the media.
+* **author_id**: The authors id.
 * **type**: The media type as a string, one of "book", "film", "cd".
 * **loaned**: Boolean indicating whether the media is currently loaned by a user.
 
@@ -65,6 +66,7 @@ CREATE TABLE `media` (
   `owned_since` text DEFAULT 'null',
   `owned_until` text DEFAULT 'null',
   `description` text DEFAULT 'null',
+  `author_id` integer DEFAULT 'null',
   `type` text DEFAULT 'null',
   `loaned` boolean DEFAULT 'FALSE'
 );
@@ -103,6 +105,7 @@ CREATE TABLE `loans` (
   `loan_date` text DEFAULT 'null',
   `return_date` text DEFAULT 'null',
   `due_date` text DEFAULT 'null',
+  `employee_id` integer DEFAULT 'null',
   `resolved` boolean DEFAULT 'FALSE'
 );
 ```
