@@ -1,7 +1,7 @@
 # Database structure
 LibbyDB, the database management system, was designed to be generic and useable by practically any library. The database schema is represented here below as an ER diagram (designed with Lucidchart), which illustrates the different tables in the database, and their internal relationships. After that follows an explanation of the variables.
 
-<img src="ER_diagram.png" alt="ER diagram" width="200"/>
+<img src="ER_diagram.png" alt="ER diagram" width="900"/>
 
 ## media
 The media table lists various forms of media, such as books, films, etc. It consists of the following variables:
