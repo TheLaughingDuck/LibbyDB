@@ -12,6 +12,10 @@ import os
 
 today_str = str(datetime.datetime.today().date())
 
+def main():
+    app = App()
+    app.mainloop()
+
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -136,6 +140,5 @@ class App(tk.Tk):
 
 
 if __name__ == "__main__":
-    app = App()
-    app.mainloop()
+    main()
 # %%

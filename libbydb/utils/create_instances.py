@@ -5,7 +5,7 @@ like media, user, loan, employee.
 
 #%%
 # SETUP
-from Application.utils.sql import query, query_and_parse
+from libbydb.utils.sql import query, query_and_parse
 import json
 from datetime import datetime, timedelta
 #%%
