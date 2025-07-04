@@ -1,0 +1,24 @@
+[project]
+name = "libbydb"
+version = "0.1.0"
+description = "A simple database management tool with CLI and GUI"
+authors = [
+  { name = "Simon Jorstedt", email = "jorstedtsimon@gmail.com" }
+]
+readme = "readme.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+libbydb = "libbydb.cli:main"  # Creates a CLI command: `libbydb`
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
