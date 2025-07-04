@@ -17,8 +17,14 @@ In order to facilitate development, the following project requirements were form
 ## Project Features
 The database currently satisfies most of the features to some extent. Below is an Entity Relationship (ER) diagram that represents the database entities and their relationships.
 
-![alt text](db_design\ER_diagram.png)
+<img src="db_design/ER_diagram.png" alt="ER diagram" width="900"/>
 
-## Upcoming features
+* LibbyDB is executable, and can be run in the following way, opening either the CLI or GUI. Default mode is "cli". The GUI can also be opened in the CLI.
 
-* A table for location, so that one full library organization may be spread across multiple locations, but with a joint collection of media.
+`python -m libbydb`
+
+`python -m libbydb -mode gui`
+
+* LibbyDB can also be run with the following command:
+
+`YOUR/PATH/HERE/LibbyDB/main.py`
