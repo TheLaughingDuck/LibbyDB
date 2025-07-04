@@ -1,6 +1,7 @@
 # Local development files
 deprecated/
 experiments/
+todo.txt
 
 # Local cache
 __pycache__/
@@ -8,3 +9,13 @@ __pycache__/
 # Secrets
 .env
 
+# Ignore local logs
+/logs/sql_logs.log
+
+# Data simulation
+data_simulation_utils/
+generate_new_instances.py
+
+# Pulled data
+data.xlsx
+make_exceel_for_Tableau.py
