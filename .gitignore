@@ -2,6 +2,8 @@
 deprecated/
 experiments/
 todo.txt
+LibbyDB.egg-info
+.venv
 
 # Local cache
 __pycache__/
