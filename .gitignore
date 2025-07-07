@@ -5,6 +5,10 @@ todo.txt
 LibbyDB.egg-info
 .venv
 
+# Local tests (because they require secret keys!)
+src/libbydb/utils/test_utils.py
+
+
 # Local cache
 __pycache__/
 
