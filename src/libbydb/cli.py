@@ -5,7 +5,7 @@ It can also open the GUI with a simple command.
 '''
 
 import sys
-from libbydb.utils.create_instances import PUT
+from libbydb.utils.CRUD import CREATE
 from libbydb.gui import App
 
 def main():
