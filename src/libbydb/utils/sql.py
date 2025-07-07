@@ -8,6 +8,9 @@ import requests
 import os
 import logging
 import json
+import dotenv
+
+dotenv.load_dotenv()
 
 # Define logger
 logger = logging.getLogger(__name__)
@@ -24,7 +27,7 @@ HEADERS = {
 
 def query(sql: str, args=None):
     '''
-    This is a low level function (from the perspective of this DBMS) that executes an SQL query against the Turso database.
+    This is a low level function (from the perspective of this system) that executes an SQL query against the Turso database.
 
     Every query is logged in "LibbyDB/logs/sql_logs.log"
     '''
