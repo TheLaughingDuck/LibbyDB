@@ -32,7 +32,7 @@ def CREATE(table: str, variables: list, values: list):
 
 
     sql = f"INSERT INTO {table} ({", ".join(variables)}) VALUES ('{"\', \'".join(values)}')"
-    return query(sql)
+    return query(sql=sql, DB_URL="TURSO_DATABASE_URL", DB_AUTH_TOKEN="TURSO_AUTH_TOKEN")
 
 #%%
 def READ(table: str, variables: list = None, where_variables: list = None, where_relations: list = None, where_values: list = None):
@@ -64,4 +64,4 @@ def READ(table: str, variables: list = None, where_variables: list = None, where
 
     sql = f"SELECT {", ".join(variables)} FROM {table}" + where_statement + ";"
 
-    return query_and_parse(sql)
+    return query_and_parse(sql=sql, DB_URL="TURSO_DATABASE_URL", DB_AUTH_TOKEN="TURSO_AUTH_TOKEN")
