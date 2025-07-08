@@ -15,18 +15,18 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(filename="logs/sql_logs.log", encoding="utf-8", level=logging.INFO)
 
 
-def query(sql: str, DB_URL:str, DB_AUTH_TOKEN:str, args=None):
+def query(sql: str, DB_URL:str, DB_AUTH_TOKEN:str, args:list|str=None):
     '''
     Sends an sql query to the database, and returns the response.
 
     ARGUMENTS:
-        sql: An SQL string that is sent to the DBMS. For example "SELECT (name) FROM users".
-
-        DB_URL: Either the environment name of the database URL (hidden in a local .env file), or the raw database URL (i.e. "KJKASSDKBKABDKJBAKJADDJA...")
-
-        DB_AUTH_TOKEN: Either the environment name for the appropriate authentication token, (hidden in a local .env file), or the raw authentication token (i.e. "KJKASSDKBKABDKJBAKJADDJA...")
-
-        args: Optional extra arguments to the `requests.post` payload.
+    * sql: An SQL string that is sent to the DBMS. For example "SELECT (name) FROM users".\n
+    
+    * DB_URL: Either the environment name of the database URL (hidden in a local .env file), or the raw database URL (i.e. "KJKASSDKBKABDKJBAKJADDJA...").\n
+        
+    * DB_AUTH_TOKEN: Either the environment name for the appropriate authentication token, (hidden in a local .env file), or the raw authentication token (i.e. "KJKASSDKBKABDKJBAKJADDJA...").\n
+        
+    * args: Optional extra arguments to the `requests.post` payload.\n
 
     Every query is logged in "WORKING_DIR/logs/sql_logs.log"
     '''
@@ -47,7 +47,7 @@ def query(sql: str, DB_URL:str, DB_AUTH_TOKEN:str, args=None):
         'Content-Type': 'application/json'
     }
 
-    
+    # Assemble payload
     payload = {
         'requests': [
             {
@@ -92,20 +92,24 @@ def query(sql: str, DB_URL:str, DB_AUTH_TOKEN:str, args=None):
         raise Exception(f"Error executing query: {response.status_code} - {response.text}")
 
 
-# def handle_response(response):
-#     '''Handles the response from the Turso database.'''
-#     if response.status_code == 200:
-#         return response.json()
-#     else:
-#         raise Exception(f"Error executing query: {response.status_code} - {response.text}")
 
-
-def query_and_parse(sql: str):
+def query_and_parse(sql: str, DB_URL:str, DB_AUTH_TOKEN:str, args:list=None):
     '''
     Wrapper for `query`, useful when doing READ requests. Returns the response in a pandas dataframe.
+
+    ARGUMENTS:
+    * sql: An SQL string that is sent to the DBMS. For example "SELECT (name) FROM users".\n
+    
+    * DB_URL: Either the environment name of the database URL (hidden in a local .env file), or the raw database URL (i.e. "KJKASSDKBKABDKJBAKJADDJA...").\n
+        
+    * DB_AUTH_TOKEN: Either the environment name for the appropriate authentication token, (hidden in a local .env file), or the raw authentication token (i.e. "KJKASSDKBKABDKJBAKJADDJA...").\n
+        
+    * args: Optional extra arguments to the `requests.post` payload.\n
+
+    Every query is logged in "WORKING_DIR/logs/sql_logs.log"
     '''
     
-    res = query(sql=sql)
+    res = query(sql=sql, DB_URL=DB_URL, DB_AUTH_TOKEN=DB_AUTH_TOKEN, args=args)
 
     cols = [i["name"] for i in res["results"][0]["response"]["result"]["cols"]]
     rows = [[i["value"] if "value" in i.keys() else "null" for i in row] for row in res["results"][0]["response"]["result"]["rows"]]
