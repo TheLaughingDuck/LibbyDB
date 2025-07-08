@@ -9,6 +9,7 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 import os
+from utils import sql
 
 today_str = str(datetime.datetime.today().date())
 
@@ -30,7 +31,7 @@ class App(tk.Tk):
         self.pannel_make_media(row=3, col=0)
         self.pannel_make_employee(row=4, col=0)
 
-        self.state("zoomed") # Maximize the window
+        self.state("zoomed") # Maximize the windowC
 
         #str(self.winfo_screenwidth()) + "x" + str(self.winfo_screenheight())
     
@@ -137,6 +138,48 @@ class App(tk.Tk):
     def make_employee(self):
         # Make an employee
         print("Making an employee...")
+
+
+class App_v2(tk.Tk):
+    '''
+    An updated App class, intended to be more general, and to be able to generate a neat user interface by inferring the database schema from the tables.
+    '''
+    def __init__(self, tables:list, DB_URL:str, DB_AUTH_TOKEN:str, title="Database GUI"):
+        # SET UP GUI
+        super().__init__()
+        self.title(title)
+
+        # SET UP querying
+        self.DB_URL = DB_URL
+        self.DB_AUTH_TOKEN = DB_AUTH_TOKEN
+        self.tables = tables
+        self.schema = self.get_db_schema()
+
+        # RENDER pannels
+        self.pannel_CREATE()
+    
+    def get_db_schema(self):
+        '''
+        Grab the database schema, i.e. grab instances from each table in order to see what columns they have.
+        '''
+        schema = {}
+        for table in self.tables:
+            sql_string = f"SELECT * FROM {table} LIMIT 1"
+            result = sql.query_and_parse(sql=sql_string, DB_URL=self.DB_URL, DB_AUTH_TOKEN=self.DB_AUTH_TOKEN)
+
+            schema[table] = result.columns.tolist()
+        
+        return schema
+        
+
+    def pannel_CREATE(self):
+        '''
+        Creates a pannel of boxes for each table in the database, which can be used to create new instances.
+        '''
+        for table in self.schema:
+            pass
+
+
 
 
 if __name__ == "__main__":
