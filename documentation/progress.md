@@ -10,6 +10,7 @@ This is how you can use this system as of now.
 2) Manually run dev_server.py in a different terminal, and observe how a task is stored in the wh_task_queue.sqlite file, and then executed on the warehouse.sqlite file by wh_server.py
 
 ## **The Operational System** 
+- [x] Employee CLI
 - [ ] Employee GUI
 - [ ] Buffer data warehouse file
 - [ ] Loaner GUI
