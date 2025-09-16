@@ -24,6 +24,9 @@ def wh_server():
     # Build the warehouse and task queue, if they don't already exist.
     build_warehouse()
 
+    # POPULATE
+    populate()
+
     # LOOP
     while (time.time() - start_time < 300):
         # PRINT STATUS MESSAGE every status_message_interval seconds
@@ -96,6 +99,22 @@ def do_command():
         except Exception as e:
             print(f"An unknown error occurred: {e}")
             queue_conn.execute(f"UPDATE task SET status='failed', response='{str(e)}' WHERE id = '{task[0]}'")
+
+
+import uuid
+def populate():
+    '''
+    Populate the data warehouse with some media for testing purposes.
+    '''
+    
+    conn = sqlite3.connect("dbms/warehouse.sqlite", isolation_level=None)
+    commands = qm.populate
+
+    for c in commands.split(";"):
+        # Random unique id
+        id = uuid.uuid4()
+        conn.execute(c.replace("IDPLACEHOLDER", str(id)))
+    conn.close()
 
 
 if __name__ == "__main__": wh_server()
